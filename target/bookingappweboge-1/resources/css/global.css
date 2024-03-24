@@ -1,0 +1,73 @@
+/*control the size of any <a> tag in the web page*/
+a{
+   font-size:0.6rem;
+}
+/* controls the background, font-style, font-family, font-size, and top padding 
+of the web page. The top padding is the space between the <body> tag and the
+web browser
+*/
+body{
+     background-color:#ffffff;
+     font-style:normal;
+     color:#363945;
+     font-family:noto sans,sansserif;
+     font-size:1rem;
+     padding-top:0rem;
+}
+/*controls the font-size, line-height and font-color of any text in a <selectd>
+or <option> tag. Define for the calendar module*/
+select,option{
+    font-size:0.9rem;
+    line-height:1rem;
+    color:#495057;
+}
+/*controls the size of the calendar*/
+body .ui-datepicker .ui-datepicker-calendar td a {
+    padding-right: 0.5rem;
+    color:#495057;
+    text-align: right;
+    width: 1rem;
+    height: 1rem;
+    line-height: 0.5rem;
+    border: 0 none;
+    display: inline-block;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+/*controls size of calendar*/
+body .ui-datepicker .ui-datepicker-calendar td {
+    padding: 0rem;
+    text-align:right;
+}
+/*controls size of calendar*/
+th {
+    padding: 0rem;
+    padding-left: 3px;
+    padding-right: 0rem;
+    color: #495057;
+    text-align: right;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    border: 0 none;
+    display: table-cell;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+/*controls the header of the calendar*/
+div.ui-datepicker-header{
+    font-size:0.5rem;
+    background-color:#e33b06;
+}
+/* controls width of calendar date month picker*/
+select.ui-datepicker-month>option{
+    font-size:0.6rem;
+    width:auto;
+}
+/* controls width of calendar date month picker*/
+select.ui-datepicker-year>option{
+    font-size:0.6rem;
+    width:auto;
+}
+/*to remove margins of ui-message-warn*/
+div.ui-message-warn{
+    margin:0px
+}

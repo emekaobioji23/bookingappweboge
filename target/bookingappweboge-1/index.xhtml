@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+        <title>Booking App</title>
+        <link  rel="icon" href="resources/images/hillrangeicon.ico" type="image/x-icon"></link>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="global.css" />
+    </h:head>
+    <h:body>
+        <p:tabView style="padding:0px;margin:0px">
+            <p:tab title="Book">
+                <p:staticMessage styleClass="ui-primefaces-warn"  severity="warn" summary="WARN" detail="Please be careful, it is terrible to book the wrong guy" style="width: 100%"/>
+                <h:panelGroup id="pg1"  layout="block">
+                    <h:form>
+                        <p:messages id="msgs"/>
+                        <br />
+                        <p:selectOneMenu id="teacher" value="#{bookOGEController.teacherid}" required="true" autoWidth="true">
+                            <f:selectItem itemLabel="Select Teacher" itemValue="" noSelectionOption="true"/>
+                            <c:forEach items="#{teacherOGEController.teacherOGEs}" var="teacherOGE">
+                                <f:selectItem itemValue="#{teacherOGE.id.toString()}" itemLabel="#{teacherOGE.name}"/>
+                            </c:forEach>
+                        </p:selectOneMenu>
+                        <p:message for="teacher" display="icon"/>
+                        <br />
+                        <br />
+                        <p:selectOneMenu id="classr" value="#{bookOGEController.classrid}" required="true" autoWidth="true" >
+                            <f:selectItem itemLabel="Select Class" itemValue="" noSelectionOption="true"/>
+                            <c:forEach items="#{classrOGEController.classrOGEs}" var="classrOGE">
+                                <f:selectItem itemValue="#{classrOGE.id.toString()}" itemLabel="#{classrOGE.classr}"/>
+                            </c:forEach>
+                            <p:ajax update="student" event="valueChange"/>
+                        </p:selectOneMenu>
+                        <p:message for="classr" display="icon"/>
+                        <br />
+                        <br />
+                        <p:selectOneMenu id="student" value="#{bookOGEController.studentid}" required="true" autoWidth="true">
+                            <f:selectItem itemLabel="Select Student" itemValue="" noSelectionOption="true"/>
+                            <c:forEach items="#{classingOGEController.findStudentsInClasr(bookOGEController.classrid)}" var="studentOGE">
+                                <f:selectItem itemValue="#{studentOGE.id.toString()}" itemLabel="#{studentOGE.name}"/>
+                            </c:forEach>
+                        </p:selectOneMenu>
+                        <p:message for="student" display="icon"/>
+                        <br />
+                        <br />
+                        <p:selectOneMenu id="team" value="#{bookOGEController.teamid}" required="true" autoWidth="true">
+                            <f:selectItem itemLabel="Select Team" itemValue="" noSelectionOption="true"/>
+                            <c:forEach items="#{teamOGEController.teamOGEs}" var="teamOGE">
+                                <f:selectItem itemValue="#{teamOGE.id.toString()}" itemLabel="#{teamOGE.name}"/>
+                            </c:forEach>
+                        </p:selectOneMenu>
+                        <p:message for="team" display="icon"/>
+                        <br />
+                        <br />
+                        <p:autoComplete placeholder="Type the offence" id="pac1" value="#{offenceOGEController.offenceDescription}" completeMethod="#{offenceOGEController.loadOffenceOGEDescriptions}" required="true" />
+                        <p:message for="pac1" display="icon"/>
+                        <br />
+                        <br />
+                        <p:datePicker  readonlyInput="true" placeholder="Pick the date" id="datep" value="#{calendarJava8ViewOGE.date12}" numberOfMonths="1" monthNavigator="true" yearNavigator="true" pattern="dd/MM/yyyy" required="true" />
+                        <p:message for="datep" display="icon"/>
+                        <br />
+                        <br />
+                        <p:commandButton ajax="true" id="button1" value="Book Him!" action="#{bookOGEController.book(offenceOGEController.createOffence(),calendarJava8ViewOGE.date12)}" update="@form"/>
+                        <br />
+                        <br />
+                        <h:outputText id="output" value="#{bookOGEController.bookmessage}"/>
+                    </h:form>
+                </h:panelGroup>
+            </p:tab>
+            <p:tab title="Classing">
+                <p:staticMessage styleClass="ui-primefaces-warn"  severity="warn" summary="WARN" detail="Please be careful, it is terrible to book the wrong guy" style="width: 100%"/>
+                <h:panelGroup id="pg1b"  layout="block">
+                    <div class="card">
+                        <h:form enctype="multipart/form-data">
+                            <p:fileUpload listener="#{classingOGEController.updateStudentClassAssignments}" mode="advanced" dragDropSupport="false"
+                                          update="messages" sizeLimit="1000000" allowTypes="/(\.|\/)(xls|xlsx|xlsm)$/"
+                                          validateContentType="false" accept=".xls,.xlsx,.xlsm"
+                                          onupload="return confirm('Are you sure?')"/>
+                            <p:growl id="messages" showDetail="true"/>
+                        </h:form>
+                    </div>
+                </h:panelGroup>
+            </p:tab>
+        </p:tabView>
+        <!--<h:link outcome="/teacherOGE/List" value="Show All Teachers"/>
+        <h:link outcome="/classrOGE/List" value="Show All Classes"/>
+        <br />
+        <h:link outcome="/studentOGE/List" value="Show All StudentOGE Items"/>
+        <br />
+        <h:link outcome="/teamOGE/List" value="Show All TeamOGE Items"/>
+        <br />
+        <h:link outcome="/offenceOGE/List" value="Show All OffenceOGE Items"/>
+        <br />
+        <h:link outcome="/classingOGE/List" value="Show All ClassingOGE Items"/>-->
+
+        <br />
+        <h:link outcome="/loginOGE/List" value="Show All LoginOGE Items"/>
+        <br />
+        <h:link outcome="/teacherLoginOGE/List" value="Show All TeacherLoginOGE Items"/>
+        <br />
+        <h:link outcome="/loginOGE/List" value="Show All LoginOGE Items"/>
+    </h:body>
+
+
+
+
+
+
+
+</html>

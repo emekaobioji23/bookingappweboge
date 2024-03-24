@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateClassingOGETitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateClassingOGELabel_id}" for="id" />
+                    <h:inputText id="id" value="#{classingOGEController.selected.id}" title="#{bundle.CreateClassingOGETitle_id}" required="true" requiredMessage="#{bundle.CreateClassingOGERequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateClassingOGELabel_studentid}" for="studentid" />
+                    <h:inputText id="studentid" value="#{classingOGEController.selected.studentid}" title="#{bundle.CreateClassingOGETitle_studentid}" />
+                    <h:outputLabel value="#{bundle.CreateClassingOGELabel_classrid}" for="classrid" />
+                    <h:inputText id="classrid" value="#{classingOGEController.selected.classrid}" title="#{bundle.CreateClassingOGETitle_classrid}" />
+                    <h:outputLabel value="#{bundle.CreateClassingOGELabel_dateofclassing}" for="dateofclassing" />
+                    <h:inputText id="dateofclassing" value="#{classingOGEController.selected.dateofclassing}" title="#{bundle.CreateClassingOGETitle_dateofclassing}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{classingOGEController.create}" value="#{bundle.CreateClassingOGESaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{classingOGEController.prepareList}" value="#{bundle.CreateClassingOGEShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateClassingOGEIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
